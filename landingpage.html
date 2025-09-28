@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FONO - The AI Receptionist for Modern Businesses</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --primary-color: #6366f1; /* Indigo */
+        --secondary-color: #10b981; /* Emerald */
+        --accent-color: #ec4899; /* Pink */
+        --text-color: #111827;
+        --bg-color: #f9fafb;
+        --card-bg: rgba(255, 255, 255, 0.85);
+        --shadow-color: rgba(0, 0, 0, 0.1);
+        --gradient-primary: linear-gradient(
+          135deg,
+          var(--primary-color),
+          var(--secondary-color)
+        );
+        --transition: all 0.3s ease;
+        --border-radius: 1rem;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        line-height: 1.6;
+        color: var(--text-color);
+        background: var(--bg-color);
+        scroll-behavior: smooth;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 1.5rem;
+      }
+
+      /* Header */
+      .header {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(20px);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        padding: 1rem 0;
+        box-shadow: 0 2px 10px var(--shadow-color);
+      }
+
+      .nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .logo {
+        font-size: 1.5rem;
+        font-weight: 800;
+        background: var(--gradient-primary);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 2rem;
+        list-style: none;
+      }
+
+      .nav-links a {
+        text-decoration: none;
+        color: var(--text-color);
+        font-weight: 500;
+        position: relative;
+      }
+
+      .nav-links a::after {
+        content: "";
+        position: absolute;
+        bottom: -4px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: var(--primary-color);
+        transition: var(--transition);
+      }
+
+      .nav-links a:hover::after {
+        width: 100%;
+      }
+
+      /* Hero */
+      .hero {
+        background: var(--gradient-primary);
+        color: white;
+        text-align: center;
+        padding: 8rem 2rem;
+        position: relative;
+        clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+      }
+
+      .hero h1 {
+        font-size: 3.5rem;
+        font-weight: 800;
+        margin-bottom: 1rem;
+        animation: fadeIn 1s ease;
+      }
+
+      .hero p {
+        font-size: 1.25rem;
+        max-width: 700px;
+        margin: 0 auto 2rem;
+        animation: fadeIn 1.2s ease;
+      }
+
+      .cta-button {
+        background: white;
+        color: var(--primary-color);
+        padding: 1rem 2.5rem;
+        border-radius: 50px;
+        font-weight: 600;
+        text-decoration: none;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+        transition: var(--transition);
+        display: inline-block;
+      }
+
+      .cta-button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Sections General */
+      section {
+        padding: 6rem 0;
+      }
+
+      h2 {
+        font-size: 2.5rem;
+        font-weight: 700;
+        text-align: center;
+        margin-bottom: 3rem;
+      }
+
+      /* Glassmorphism Cards */
+      .card {
+        background: var(--card-bg);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: var(--border-radius);
+        padding: 2rem;
+        box-shadow: 0 10px 30px var(--shadow-color);
+        transition: var(--transition);
+      }
+
+      .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 40px var(--shadow-color);
+      }
+
+      /* Problem Section */
+      .problem-section {
+        background: #f3f4f6;
+      }
+
+      .problem-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 3rem;
+      }
+
+      .problem-visual {
+        text-align: center;
+        padding: 2rem;
+        background: white;
+        border-radius: var(--border-radius);
+      }
+
+      .problem-icon {
+        font-size: 4rem;
+        margin-bottom: 1rem;
+      }
+
+      /* Solution Section */
+      .solution-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+      }
+
+      /* Features Section */
+      .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+      }
+
+      .feature-icon {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+      }
+
+      /* Benefits Section */
+      .benefits-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+        margin-bottom: 3rem;
+      }
+
+      .benefit-icon {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+      }
+
+      .testimonial {
+        max-width: 800px;
+        margin: 0 auto;
+        text-align: center;
+        font-style: italic;
+        padding: 2rem;
+        background: white;
+        border-radius: var(--border-radius);
+        box-shadow: 0 5px 15px var(--shadow-color);
+      }
+
+      /* Pricing Section */
+      .pricing-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+      }
+
+      .pricing-card {
+        text-align: center;
+      }
+
+      .pricing-card.featured {
+        transform: scale(1.05);
+        border: 2px solid var(--primary-color);
+      }
+
+      .price {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin: 1rem 0;
+      }
+
+      .pricing-features {
+        list-style: none;
+        margin-bottom: 2rem;
+      }
+
+      .pricing-features li {
+        margin-bottom: 0.75rem;
+      }
+
+      /* Footer */
+      .footer {
+        background: var(--primary-color);
+        color: white;
+        padding: 4rem 0;
+        text-align: center;
+      }
+
+      .footer-cta h2 {
+        color: white;
+      }
+
+      .footer-cta p {
+        margin: 1rem 0 2rem;
+      }
+
+      .contact-info {
+        margin: 2rem 0;
+      }
+
+      .social-links {
+        display: flex;
+        justify-content: center;
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+      }
+
+      .social-links a {
+        color: white;
+        text-decoration: none;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 1024px) {
+        .problem-content {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .hero h1 {
+          font-size: 2.5rem;
+        }
+
+        .hero p {
+          font-size: 1rem;
+        }
+
+        h2 {
+          font-size: 2rem;
+        }
+
+        .nav-links {
+          gap: 1rem;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .container {
+          padding: 0 1rem;
+        }
+
+        .cta-button {
+          padding: 0.75rem 2rem;
+        }
+      }
+
+      /* Modern CSS Features: Using :has() for conditional styling */
+      .pricing-card:has(.featured) {
+        position: relative;
+      }
+
+      .pricing-card:has(.featured)::before {
+        content: "Popular";
+        position: absolute;
+        top: -1rem;
+        left: 50%;
+        transform: translateX(-50%);
+        background: var(--accent-color);
+        color: white;
+        padding: 0.25rem 1rem;
+        border-radius: 50px;
+        font-size: 0.875rem;
+      }
+
+      /* Container Queries (if supported) */
+      @container (min-width: 400px) {
+        .card {
+          padding: 3rem;
+        }
+      }
+
+      /* Aspect Ratio for Icons */
+      .feature-icon,
+      .benefit-icon {
+        aspect-ratio: 1 / 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 4rem;
+        height: 4rem;
+        background: var(--gradient-primary);
+        border-radius: 50%;
+        color: white;
+        margin: 0 auto 1rem;
+      }
+
+      /* Scroll Snap for Sections (optional enhancement) */
+      html {
+        scroll-snap-type: y proximity;
+      }
+
+      section {
+        scroll-snap-align: start;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="header">
+      <nav class="nav container">
+        <div class="logo">FONO</div>
+        <ul class="nav-links">
+          <li><a href="#features">Features</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero-content">
+          <h1>FONO: The AI Receptionist for Modern Businesses</h1>
+          <p>
+            Never miss a call, chat, or client booking again. We handle your
+            communications 24/7 so you can focus on growth.
+          </p>
+          <a href="#contact" class="cta-button">Request a Demo</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section class="problem-section">
+      <div class="container">
+        <h2>Are You Losing Customers to Missed Calls?</h2>
+        <div class="problem-content">
+          <div class="problem-text">
+            <p>
+              Running a business means juggling countless tasks simultaneously.
+              Between managing operations, serving customers, and planning for
+              growth, it's impossible to answer every call, respond to every
+              chat, and handle every booking request.
+            </p>
+            <p>
+              The result? Frustrated customers who hang up after three rings,
+              potential clients who find competitors while waiting for
+              responses, and revenue walking out the door every single day. You
+              know you're losing business, but what can you do when there are
+              only 24 hours in a day?
+            </p>
+          </div>
+          <div class="problem-visual card">
+            <div class="problem-icon">📞❌</div>
+            <h3>The Hidden Cost of Missed Opportunities</h3>
+            <p>Every unanswered call could be your next big client</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Solution Section -->
+    <section class="solution-section">
+      <div class="container">
+        <h2>Meet FONO: Your Always-On Business Assistant</h2>
+        <div class="solution-grid">
+          <div class="solution-card card">
+            <h3>🤖 AI-Powered Intelligence</h3>
+            <p>
+              Advanced AI that understands your business and customers,
+              providing human-like interactions that build trust and drive
+              conversions.
+            </p>
+          </div>
+          <div class="solution-card card">
+            <h3>📱 Unified Communication Hub</h3>
+            <p>
+              All your customer touchpoints - calls, chats, bookings - managed
+              seamlessly in one intelligent platform.
+            </p>
+          </div>
+          <div class="solution-card card">
+            <h3>⚡ Instant Response Guarantee</h3>
+            <p>
+              Every inquiry is handled immediately, ensuring no customer ever
+              feels ignored or forgotten.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section" id="features">
+      <div class="container">
+        <h2>What FONO Can Do For You</h2>
+        <div class="features-grid">
+          <div class="feature-card card">
+            <div class="feature-icon">🔄</div>
+            <h3>All-in-One AI Support</h3>
+            <p>
+              Unified platform for calls, chats, and bookings. One dashboard to
+              manage all customer interactions across every channel.
+            </p>
+          </div>
+          <div class="feature-card card">
+            <div class="feature-icon">💬</div>
+            <h3>Smart Conversation Handling</h3>
+            <p>
+              AI answers FAQs and provides human-like replies, understanding
+              context and delivering personalized responses every time.
+            </p>
+          </div>
+          <div class="feature-card card">
+            <div class="feature-icon">🌙</div>
+            <h3>24/7 Availability</h3>
+            <p>
+              Your business is always open, even after hours. Capture leads and
+              serve customers around the clock, automatically.
+            </p>
+          </div>
+          <div class="feature-card card">
+            <div class="feature-icon">📅</div>
+            <h3>Seamless Booking</h3>
+            <p>
+              AI schedules appointments directly without any manual work.
+              Integrates with your calendar and sends confirmations
+              automatically.
+            </p>
+          </div>
+          <div class="feature-card card">
+            <div class="feature-icon">📊</div>
+            <h3>Smart Analytics</h3>
+            <p>
+              Detailed insights into customer interactions, peak times, and
+              conversion rates to help you optimize your business strategy.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="benefits-section">
+      <div class="container">
+        <h2>Peace of Mind & Profits</h2>
+        <div class="benefits-grid">
+          <div class="benefit-item card">
+            <div class="benefit-icon">⏰</div>
+            <h3>Save Time</h3>
+            <p>
+              Reclaim hours every day by automating routine customer
+              interactions
+            </p>
+          </div>
+          <div class="benefit-item card">
+            <div class="benefit-icon">💰</div>
+            <h3>Cut Costs</h3>
+            <p>
+              Reduce staffing needs while improving service quality and
+              availability
+            </p>
+          </div>
+          <div class="benefit-item card">
+            <div class="benefit-icon">📈</div>
+            <h3>Increase Revenue</h3>
+            <p>Never miss another lead or booking opportunity again</p>
+          </div>
+          <div class="benefit-item card">
+            <div class="benefit-icon">🤝</div>
+            <h3>Enhance Customer Trust</h3>
+            <p>
+              Consistent, professional service that builds lasting relationships
+            </p>
+          </div>
+        </div>
+
+        <div class="testimonial">
+          <p>
+            "Since implementing FONO, we've seen a 40% increase in bookings and
+            our customers consistently praise our responsiveness. It's like
+            having a full-time receptionist who never takes a break. The ROI was
+            clear within the first month."
+          </p>
+          <br />
+          <strong>- Sarah M., Wellness Center Owner</strong>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing-section" id="pricing">
+      <div class="container">
+        <h2>Choose Your Plan</h2>
+        <div class="pricing-grid">
+          <div class="pricing-card card">
+            <h3>Basic</h3>
+            <div class="price">
+              ₹5000<span style="font-size: 1rem">/month</span>
+            </div>
+            <ul class="pricing-features">
+              <li>Up to 100 interactions/month</li>
+              <li>Basic AI responses</li>
+              <li>Email support</li>
+              <li>Simple booking integration</li>
+            </ul>
+            <a href="#contact" class="cta-button">Get Started</a>
+          </div>
+          <div class="pricing-card card featured">
+            <h3>Pro</h3>
+            <div class="price">
+              ₹7000<span style="font-size: 1rem">/month</span>
+            </div>
+            <ul class="pricing-features">
+              <li>Up to 500 interactions/month</li>
+              <li>Advanced AI conversations</li>
+              <li>Priority support</li>
+              <li>Full calendar integration</li>
+              <li>Analytics dashboard</li>
+              <li>Custom responses</li>
+            </ul>
+            <a href="#contact" class="cta-button">Start Free Trial</a>
+          </div>
+          <div class="pricing-card card">
+            <h3>Enterprise</h3>
+            <div class="price">
+              ₹10000<span style="font-size: 1rem">/month</span>
+            </div>
+            <ul class="pricing-features">
+              <li>Unlimited interactions</li>
+              <li>Custom AI training</li>
+              <li>Dedicated account manager</li>
+              <li>Advanced integrations</li>
+              <li>White-label options</li>
+              <li>24/7 phone support</li>
+            </ul>
+            <a href="#contact" class="cta-button">Contact Sales</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" id="contact">
+      <div class="container">
+        <div class="footer-cta">
+          <h2>Ready to Never Miss Another Customer?</h2>
+          <p>
+            Join thousands of businesses that trust FONO to handle their
+            customer communications.
+          </p>
+          <a href="mailto:info@fono.com" class="cta-button"
+            >Start Your Free Trial Today</a
+          >
+        </div>
+
+        <div class="contact-info">
+          <p>
+            Email:
+            <a
+              href="mailto:info@fono.com"
+              style="color: var(--secondary-color); text-decoration: none"
+              >info@fono.com</a
+            >
+          </p>
+          <p>Phone: 1-800-FONO-NOW</p>
+        </div>
+
+        <div class="social-links">
+          <a href="#">LinkedIn</a>
+          <a href="#">Twitter</a>
+          <a href="#">Facebook</a>
+        </div>
+
+        <p style="margin-top: 2rem; color: rgba(255, 255, 255, 0.7)">
+          © 2025 FONO. All rights reserved.
+        </p>
+      </div>
+    </footer>
+
+    <script>
+      // Smooth scrolling
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          document.querySelector(this.getAttribute("href")).scrollIntoView({
+            behavior: "smooth",
+          });
+        });
+      });
+
+      // Intersection Observer for fade-in
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("visible");
+            }
+          });
+        },
+        { threshold: 0.1 }
+      );
+
+      document.querySelectorAll(".card").forEach((card) => {
+        card.classList.add("fade-in");
+        observer.observe(card);
+      });
+
+      // Add this to style for fade-in
+      const style = document.createElement("style");
+      style.innerHTML = `
+        .fade-in {
+          opacity: 0;
+          transform: translateY(20px);
+          transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .fade-in.visible {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      `;
+      document.head.appendChild(style);
+    </script>
+  </body>
+</html>
